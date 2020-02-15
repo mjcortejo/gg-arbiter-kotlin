@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="67dp"
         android:layout_marginTop="70dp"
+        android:onClick="takePictureIntent"
         android:text="@string/predictWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -31,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="61dp"
+        android:onClick="takePictureIntent"
         android:text="@string/predictBlack"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnPredictWhite"
         app:layout_constraintEnd_toEndOf="parent" />
