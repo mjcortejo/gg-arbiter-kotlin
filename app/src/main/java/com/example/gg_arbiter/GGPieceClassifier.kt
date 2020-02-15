@@ -138,7 +138,7 @@ class GGPieceClassifier(private val context: Context){
     companion object {
         private const val TAG = "GGClassifier"
 
-        private const val MODEL_FILE = "converetd_model.tflite"
+        private const val MODEL_FILE = "converted_model.tflite"
 
         private const val FLOAT_TYPE_SIZE = 4
         private const val PIXEL_SIZE = 1
