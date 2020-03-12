@@ -96,14 +96,38 @@ class MainActivity : AppCompatActivity() {
     private fun classifyDrawing()
     {
         Log.d(TAG, "Classifying now")
-//        val bitmap = imageView?.getBitmap()
-//
-//        when(color){
-//            "white" -> {
-//                currentPieceID = "white"
-//            }
-//            "black" -> Log.d(TAG, "This is really black")
-//        }
+        val classifyWhitePiece: Bitmap = whiteBitmap as Bitmap
+        val classifyBlackPiece: Bitmap = blackBitmap as Bitmap
+        var whitePieceName: String? = null
+        var blackPieceName: String? = null
+
+        if ((whiteBitmap != null) && (blackBitmap != null) && (ggPieceClassifier.isInitialized)){
+            // Classifying white Piece
+            ggPieceClassifier
+                .classifyAsync(classifyWhitePiece)
+                .addOnSuccessListener { resultText ->
+                    Log.d(TAG, resultText)
+                    whitePieceName = resultText
+                }
+                .addOnFailureListener { e ->
+                    Log.e(TAG, "Error classifying White Piece", e)
+                }
+            // Classifying black Piece
+            ggPieceClassifier
+                .classifyAsync(classifyBlackPiece)
+                .addOnSuccessListener { resultText ->
+                    Log.d(TAG, resultText)
+                    blackPieceName = resultText
+                }
+                .addOnFailureListener { e ->
+                    Log.e(TAG, "Error classifying Black Piece", e)
+                }
+        }
+
+        // https://www.tensorflow.org/lite/guide/faq#how_do_i_inspect_a_tflite_file
+
+//        Log.d(TAG, whitePieceName as String)
+//        Log.d(TAG, blackPieceName as String)
     }
 
     companion object{
