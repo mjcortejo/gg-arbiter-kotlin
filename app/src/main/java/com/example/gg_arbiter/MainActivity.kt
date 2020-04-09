@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
      */
     fun takePictureIntent(view: View) {
         currentPieceID = getResourceID(view)
-        Log.i(TAG, currentPieceID)
 
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(packageManager) != null) {
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                     if (currentPieceID == "btnPredictWhite") whiteBitmap = imageBitmap
                     else if (currentPieceID == "btnPredictBlack") blackBitmap = imageBitmap
 
-                    Log.d(TAG, currentPieceID)
                 }
             }
         }
@@ -122,8 +120,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Classifying now")
         val classifyWhitePiece: Bitmap = whiteBitmap as Bitmap
         val classifyBlackPiece: Bitmap = blackBitmap as Bitmap
-        var whitePieceName: String? = null
-        var blackPieceName: String? = null
 
         if ((whiteBitmap != null) && (blackBitmap != null) && (ggPieceClassifier.isInitialized)){
             // Classifying white Piece
@@ -182,7 +178,7 @@ class MainActivity : AppCompatActivity() {
         }
         else if (compareArray.contains(-2)) // one Spy situation
         {
-            var index = compareArray.indexOf(-2)
+//            var index = compareArray.indexOf(-2)
             if (compareArray.contains(0)) //if there is a private
             {
                 var privateIndex = compareArray.indexOf(0)
