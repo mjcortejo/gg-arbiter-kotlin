@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textOutput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -25,7 +25,7 @@
         android:onClick="takePictureIntent"
         android:text="@string/predictWhite"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textOutput" />
 
     <Button
         android:id="@+id/btnPredictBlack"
@@ -41,9 +41,10 @@
         android:id="@+id/btnChallenge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="48dp"
         android:text="@string/challenge"
+        app:layout_constraintEnd_toStartOf="@+id/btnPredictBlack"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnPredictWhite"
         app:layout_constraintTop_toBottomOf="@+id/btnPredictWhite" />
 
