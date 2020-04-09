@@ -131,7 +131,8 @@ class GGPieceClassifier(private val context: Context){
 
     private fun getOutputString(output: FloatArray): String {
         val maxIndex = output.indices.maxBy { output[it] } ?: -1
-        return "Prediction Result: %d\nConfidence: %2f".format(maxIndex, output[maxIndex])
+        val pieceName = class_index[maxIndex]
+        return "Prediction Result: %s\nConfidence: %2f".format(pieceName, output[maxIndex])
     }
 
     private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
