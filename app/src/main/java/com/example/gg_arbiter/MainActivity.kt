@@ -167,6 +167,9 @@ class MainActivity : AppCompatActivity() {
         "general_5" to 12
     )
 
+    /**
+     * Rank comparator function returns integer, negative for black, positive for white [Number]
+     */
     private fun compareRanks(whitePiece: String?, blackPiece: String?): Int
     {
         var result = 0
