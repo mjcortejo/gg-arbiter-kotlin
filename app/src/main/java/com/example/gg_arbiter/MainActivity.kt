@@ -129,28 +129,24 @@ class MainActivity : AppCompatActivity() {
 
         if ((whiteBitmap != null) && (blackBitmap != null) && (ggPieceClassifier.isInitialized)){
             // Classifying white Piece
-            ggPieceClassifier
-                .classifyAsync(classifyWhitePiece)
-                .addOnSuccessListener { resultText ->
-                    Log.d(TAG, resultText)
-                    whitePieceName = resultText
+            var blackResult = ggPieceClassifier.classify(classifyWhitePiece)
+            var whiteResult = ggPieceClassifier.classify(classifyBlackPiece)
+//            Toast.makeText(this@MainActivity, whiteResult, Toast.LENGTH_SHORT).show()
+            var winner = compareRanks(whiteResult, blackResult)
+            when {
+                winner == 0 -> {
+                    Toast.makeText(this@MainActivity, "Same ranks, remove both pieces. If flag, whoever moves into the same square occupied by the other flag wins", Toast.LENGTH_LONG).show()
                 }
-                .addOnFailureListener { e ->
-                    Log.e(TAG, "Error classifying White Piece", e)
+                winner < 0 -> {
+                    Toast.makeText(this@MainActivity, "Black Piece wins", Toast.LENGTH_LONG).show()
                 }
-            // Classifying black Piece
-            ggPieceClassifier
-                .classifyAsync(classifyBlackPiece)
-                .addOnSuccessListener { resultText ->
-                    Log.d(TAG, resultText)
-                    blackPieceName = resultText
+                winner > 0 -> {
+                    Toast.makeText(this@MainActivity, "White Piece wins", Toast.LENGTH_LONG).show()
                 }
-                .addOnFailureListener { e ->
-                    Log.e(TAG, "Error classifying Black Piece", e)
-                }
+            }
         }
-
         // https://www.tensorflow.org/lite/guide/faq#how_do_i_inspect_a_tflite_file
+    }
 
 //        Log.d(TAG, whitePieceName as String)
 //        Log.d(TAG, blackPieceName as String)
