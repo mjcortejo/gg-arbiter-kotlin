@@ -115,6 +115,10 @@ class MainActivity : AppCompatActivity() {
 //        ggPieceClassifier.close()
 //        super.onDestroy()
 //    }
+
+    /**
+     * Predict the rank outputs and compare ranks
+     */
     private fun classifyDrawing()
     {
         Log.d(TAG, "Classifying now")
