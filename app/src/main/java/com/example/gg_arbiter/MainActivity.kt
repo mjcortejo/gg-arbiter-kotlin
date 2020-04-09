@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import java.lang.Exception
 
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private var predictWhiteButton: Button? = null
     private var predictBlackButton: Button? = null
     private var challengeButton: Button? = null
+    private var textOutput: TextView? = null
+
     private var ggPieceClassifier = GGPieceClassifier(this);
     private var currentPieceID: String? = null
     private var whiteBitmap: Bitmap? = null
@@ -85,13 +88,8 @@ class MainActivity : AppCompatActivity() {
         predictWhiteButton = findViewById(R.id.btnPredictWhite)
         predictBlackButton = findViewById(R.id.btnPredictBlack)
         challengeButton = findViewById(R.id.btnChallenge)
+        textOutput = findViewById(R.id.textOutput)
 
-//        predictWhiteButton?.setOnClickListener {
-//            currentPieceID = "white"
-//        }
-//        predictBlackButton?.setOnClickListener {
-//            currentPieceID = "black"
-//        }
         ggPieceClassifier
             .initialize()
             .addOnFailureListener {e -> Log.e(TAG, "Error setting up gg piece classifier.", e)}
@@ -135,13 +133,16 @@ class MainActivity : AppCompatActivity() {
             var winner = compareRanks(whiteResult, blackResult)
             when {
                 winner == 0 -> {
-                    Toast.makeText(this@MainActivity, "Same ranks, remove both pieces. If flag, whoever moves into the same square occupied by the other flag wins", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this@MainActivity, "Same ranks, remove both pieces. If flag, whoever moves into the same square occupied by the other flag wins", Toast.LENGTH_LONG).show()
+                    textOutput?.text = "Same ranks, remove both pieces. If flag, whoever moves into the same square occupied by the other flag wins"
                 }
                 winner < 0 -> {
-                    Toast.makeText(this@MainActivity, "Black Piece wins", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this@MainActivity, "Black Piece wins", Toast.LENGTH_LONG).show()
+                    textOutput?.text = "Black Piece wins"
                 }
                 winner > 0 -> {
-                    Toast.makeText(this@MainActivity, "White Piece wins", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this@MainActivity, "White Piece wins", Toast.LENGTH_LONG).show()
+                    textOutput?.text = "White Piece wins"
                 }
             }
         }
