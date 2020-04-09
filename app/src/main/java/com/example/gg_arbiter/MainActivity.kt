@@ -148,8 +148,67 @@ class MainActivity : AppCompatActivity() {
         // https://www.tensorflow.org/lite/guide/faq#how_do_i_inspect_a_tflite_file
     }
 
-//        Log.d(TAG, whitePieceName as String)
-//        Log.d(TAG, blackPieceName as String)
+    val rank_map = mapOf<String, Int>(
+        "spy" to -2,
+        "flag" to -1,
+        "private" to 0,
+        "sergeant" to 1,
+        "lieutenant_2" to 2,
+        "lieutenant_1" to 3,
+        "captain" to 4,
+        "major" to 5,
+        "lieutenant_colonel" to 6,
+        "colonel" to 7,
+        "general_1" to 8,
+        "general_2" to 9,
+        "general_3" to 10,
+        "general_4" to 11,
+        "general_5" to 12
+    )
+
+    private fun compareRanks(whitePiece: String?, blackPiece: String?): Int
+    {
+        var result = 0
+        var compareArray = arrayOf(rank_map[whitePiece], rank_map[blackPiece])
+        var initialResult = compareArray[0]!! - compareArray[1]!!
+
+        if (initialResult == 0) // Same ranks remove both pieces, if flag the one who moved to the same space as the other wins
+        {
+            return result //return result which is already 0
+        }
+        else if (compareArray.contains(-2)) // one Spy situation
+        {
+            var index = compareArray.indexOf(-2)
+            if (compareArray.contains(0)) //if there is a private
+            {
+                var privateIndex = compareArray.indexOf(0)
+                result = if (privateIndex == 0)
+                    1 //white wins
+                else
+                    -1 //black wins
+                return result
+            }
+            else //if it's another ranking
+            {
+                /**
+                 * variable positions are switched because we are subtracting a negative number
+                 * if <=-3 then black
+                 * if >=3 then white
+                 */
+                return compareArray[1]!! - compareArray[0]!!
+            }
+        }
+        else if (compareArray.contains(-1)) // one flag situation
+        {
+            var index = compareArray.indexOf(-1) // who has the flag?
+            result = if (index == 0)
+                -1 // Black Wins
+            else
+                1 // White Wins
+            return result
+        }
+        else
+            return initialResult //initial result will be the basis
     }
 
     companion object{
