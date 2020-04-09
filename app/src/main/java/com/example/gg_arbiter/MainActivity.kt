@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,11 +30,17 @@ class MainActivity : AppCompatActivity() {
     val REQUEST_IMAGE_CAPTURE = 1
     private val CAMERA_REQUEST_CODE = 1
 
+    /**
+     * Returns resource id provided by the caller (in this case, either predictWhiteBtn or predictBlackBtn)
+     */
     private fun getResourceID(v: View): String? {
         var id= v.resources.getResourceEntryName(v.id)
         return id
     }
 
+    /**
+     * Define intent for taking pictures
+     */
     fun takePictureIntent(view: View) {
         currentPieceID = getResourceID(view)
         Log.i(TAG, currentPieceID)
@@ -43,6 +51,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Assign bitmap value from the given resource intent.
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -62,6 +73,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Initialize instances and listeners
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
