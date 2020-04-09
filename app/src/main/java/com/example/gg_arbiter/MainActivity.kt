@@ -92,21 +92,29 @@ class MainActivity : AppCompatActivity() {
 //        predictBlackButton?.setOnClickListener {
 //            currentPieceID = "black"
 //        }
-
-        challengeButton?.setOnClickListener{
-            classifyDrawing()
-        }
-
         ggPieceClassifier
             .initialize()
             .addOnFailureListener {e -> Log.e(TAG, "Error setting up gg piece classifier.", e)}
+
+        challengeButton?.setOnClickListener{
+            Toast.makeText(this@MainActivity, "Checking...", Toast.LENGTH_SHORT).show()
+            try
+            {
+                classifyDrawing()
+            }
+            catch (e: Exception)
+            {
+                println(e)
+            }
+        }
+
+
     }
 
-    override fun onDestroy() {
-        ggPieceClassifier.close()
-        super.onDestroy()
-    }
-
+//    override fun onDestroy() {
+//        ggPieceClassifier.close()
+//        super.onDestroy()
+//    }
     private fun classifyDrawing()
     {
         Log.d(TAG, "Classifying now")
