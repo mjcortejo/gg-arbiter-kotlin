@@ -71,7 +71,7 @@ class GGPieceClassifier(private val context: Context){
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    private fun classify(bitmap: Bitmap): String {
+    public fun classify(bitmap: Bitmap): String {
         if (!isInitialized) {
             throw IllegalStateException("TF Lite Interpreter is not initialized yet.")
         }
