@@ -90,7 +90,7 @@ class GGPieceClassifier(private val context: Context){
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    public fun classify(bitmap: Bitmap): String {
+    public fun classify(bitmap: Bitmap): String? {
         if (!isInitialized) {
             throw IllegalStateException("TF Lite Interpreter is not initialized yet.")
         }
@@ -129,10 +129,11 @@ class GGPieceClassifier(private val context: Context){
         )
     }
 
-    private fun getOutputString(output: FloatArray): String {
+    private fun getOutputString(output: FloatArray): String? {
         val maxIndex = output.indices.maxBy { output[it] } ?: -1
         val pieceName = class_index[maxIndex]
-        return "Prediction Result: %s\nConfidence: %2f".format(pieceName, output[maxIndex])
+//        return "Prediction Result: %s\nConfidence: %2f".format(pieceName, output[maxIndex])
+        return pieceName
     }
 
     private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
