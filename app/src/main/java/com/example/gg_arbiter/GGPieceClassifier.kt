@@ -28,6 +28,25 @@ class GGPieceClassifier(private val context: Context){
     private var inputImageHeight: Int = 0
     private var modelInputSize: Int = 0
 
+    /** class mapping for model's tensor output */
+    val class_index = mapOf(
+        0 to "captain",
+        1 to "colonel",
+        2 to "flag",
+        3 to "general_1",
+        4 to "general_2",
+        5 to "general_3",
+        6 to "general_4",
+        7 to "general_5",
+        8 to "lieutenant_1",
+        9 to "lieutenant_2",
+        10 to "lieutenant_colonel",
+        11 to "major",
+        12 to "private",
+        13 to "sergeant",
+        14 to "spy"
+    )
+
     fun initialize(): Task<Void> {
         return call(
             executorService,
